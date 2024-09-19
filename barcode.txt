@@ -1,0 +1,42 @@
+<a class="btn btn-xs btn-primary" onclick="showBar('<?=$item->serial_number?>','<?=$msg?>')">Show Bar Code</a>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="barmodal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="bar-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <canvas id="barcode"></canvas>
+                    <div alt="alt" class="bar_code_image"></div>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="<?= base_url() ?>admin_assets/js/JsBarcode.all.min.js"></script>
+<script>
+     function showBar(msg, title){
+        $("#bar-title").html(title);
+        $("#barmodal").modal("show");
+        $(".bar_code_image").html("");
+        
+        JsBarcode("#barcode", msg, {
+            format: "codabar",
+            lineColor: "#000",
+            width:4,
+            height:70,
+            displayValue: true
+          });
+        
+    }
+</script>
